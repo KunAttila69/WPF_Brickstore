@@ -39,7 +39,9 @@ namespace WpfApp11
                 legos.Add(new Lego(itemID, itemName, categoryName, colorName, qty));
             } 
 
-            dg_Legos.ItemsSource = legos;
+            dg_Legos.ItemsSource = legos; 
+            cb_cat.ItemsSource = legos.Select(x=> x.CategoryName).Distinct().ToList();
+            cb_color.ItemsSource = legos.Select(x => x.ColorName).Distinct().ToList();
             lbl_pieces.Content = $"Darabok száma: {legos.Count}";
         }
 
@@ -52,43 +54,50 @@ namespace WpfApp11
             }
             else
             {
-                FileSelect();
+                MessageBox.Show("Hibás fájlmegadás");
             }
         }
 
         public MainWindow()
         {
-            InitializeComponent();
-            FileSelect();
+            InitializeComponent(); 
         }
 
-        private void OrderData(int mode)
-        { 
-            if (mode == 1)
-            {
-                dg_Legos.ItemsSource = legos.Where(x => x.ItemID.StartsWith(tb_id.Text));
-            }
-            else
-            {
-                dg_Legos.ItemsSource = legos.Where(x => x.ItemName.StartsWith(tb_name.Text));
-            } 
+        private void SearchData()
+        {
+            dg_Legos.ItemsSource = legos.Where(x => x.ItemID.ToLower().StartsWith(tb_id.Text.ToLower()) && x.ItemName.ToLower().StartsWith(tb_name.Text.ToLower()) && x.CategoryName == cb_cat.Text && x.ColorName == cb_color.Text);
+           
         }
 
         private void btn_search_Click(object sender, RoutedEventArgs e)
         {
             //Az Id magasabb prioritású mint a név, mivel az pontosabb
-            if (tb_id.Text != "")
+            if (tb_id.Text != "" || tb_name.Text != "" || cb_cat.Text != "")
             { 
-                OrderData(1);
-            }
-            else if (tb_name.Text != "")
-            { 
-                OrderData(2);
+                SearchData();
             }
             else
-            {
-                MessageBox.Show("Nincs megadva keresési paraméter");
+            { 
+                dg_Legos.ItemsSource = legos;
             }
+            lbl_pieces.Content = $"Darabok száma: {dg_Legos.Items.Count}";
+        }
+
+        private void btn_load_Click(object sender, RoutedEventArgs e)
+        {
+            FileSelect();
+        }
+
+        private void btn_cat_Click(object sender, RoutedEventArgs e)
+        {
+            cb_cat.Text = "";
+            SearchData();
+        }
+
+        private void btn_color_Click(object sender, RoutedEventArgs e)
+        {
+            cb_color.Text = "";
+            SearchData();
         }
     }
 }

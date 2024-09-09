@@ -9,22 +9,35 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Label x:Name="lbl_pieces" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"  Content="Darabok száma: 0"/>
-        <Label Content="Név: " VerticalAlignment="Center" Grid.Column="1"/>
-        <TextBox x:Name="tb_name" VerticalContentAlignment="Center" Width="110" Height="40" Grid.Column="1" />
-        <Label Content="Id: " VerticalAlignment="Center" Grid.Column="2"/>
-        <TextBox x:Name="tb_id" VerticalContentAlignment="Center" Width="110" Height="40"  Grid.Column="2"/>
+        <Button x:Name="btn_load" Content="Betöltés" Margin="15" FontSize="25" Grid.Column="4" Click="btn_load_Click" />
 
-        <Button x:Name="btn_search" Margin="15" FontSize="25" Grid.Column="3" Content="Keresés" Click="btn_search_Click"/>
+        <Label x:Name="lbl_pieces" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Content="Darabok száma: 0"/>
+        <Label Content="Név: " VerticalAlignment="Center" Grid.Column="3" Grid.Row="1"/>
+        <TextBox x:Name="tb_name" VerticalContentAlignment="Center" Width="100" Height="40" Grid.Column="3" Grid.Row="1" />
+        <Label Content="Id: " VerticalAlignment="Center" Grid.Column="3" Grid.Row="2"/>
+        <TextBox x:Name="tb_id" VerticalContentAlignment="Center" Width="100" Height="40" Grid.Column="3" Grid.Row="2"/>
 
-        <DataGrid x:Name="dg_Legos" Grid.Row="1" Grid.ColumnSpan="4" IsReadOnly="True"/>
+        <Label Content="Kat.: " VerticalAlignment="Center" Grid.Column="3" Grid.Row="3"/>
+        <ComboBox x:Name="cb_cat" VerticalContentAlignment="Center" Width="60" Margin="-40 0 0 0" Height="40" Grid.Column="3" Grid.Row="3"/>
+        <Button x:Name="btn_cat" VerticalContentAlignment="Center" Margin="60 0 0 0" Width="40" Height="40" Grid.Column="3" Grid.Row="3" Content="X" FontSize="25" Click="btn_cat_Click"/>
+
+        <Label Content="Szín: " VerticalAlignment="Center" Grid.Column="3" Grid.Row="4"/>
+        <ComboBox x:Name="cb_color" VerticalContentAlignment="Center" Width="60" Margin="-40 0 0 0" Height="40" Grid.Column="3" Grid.Row="4"/>
+        <Button x:Name="btn_color" VerticalContentAlignment="Center" Margin="60 0 0 0" Width="40" Height="40" Grid.Column="3" Grid.Row="4" Content="X" FontSize="25" Click="btn_color_Click"/>
+
+        <Button x:Name="btn_search" Margin="15" FontSize="25" Grid.Column="4" Grid.Row="5" Content="Keresés" Click="btn_search_Click"/>
+        
+        <DataGrid x:Name="dg_Legos" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="5" IsReadOnly="True"/>
     </Grid>
 </Window>
